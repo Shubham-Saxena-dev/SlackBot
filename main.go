@@ -2,17 +2,25 @@ package main
 
 import (
 	"Slackbot/bot"
-	"fmt"
+	"github.com/magiconair/properties"
 	"github.com/nlopes/slack"
-	"os"
+	log "github.com/sirupsen/logrus"
+)
+
+const (
+	TOKEN    = "SLACK_TOKEN"
+	FILENAME = "application.properties"
 )
 
 func main() {
 
-	fmt.Println("Hi, This is a slack bot demo.")
+	log.Info("Hi, This is a slack bot demo using Golang and RTM.")
 
-	//export SLACK_TOKEN=abcd123...
-	token := os.Getenv("SLACK_TOKEN")
+	props := properties.MustLoadFile(FILENAME, properties.UTF8)
+	token, ok := props.Get(TOKEN)
+	if !ok {
+		panic("Token not found")
+	}
 	api := slack.New(token)
 	rtm := api.NewRTM()
 	start := bot.NewBotConfiguration(api, rtm)

@@ -12,7 +12,7 @@ func Response(rtm *slack.RTM, message *slack.MessageEvent) {
 		"hi":             "Hey " + rtm.GetInfo().Team.Name,
 		"hello":          "Hi " + rtm.GetInfo().Team.Name,
 		"what's up":      "Up are the clouds",
-		"how are you?":   "I'm doing good. What about you",
+		"how are you?":   "I'm doing good. What about you?",
 		"how's it going": "you know, as usual. You tell how's your job working for you",
 		"day ?":          "Hmm...I think its " + time.Now().Weekday().String(),
 		"date":           time.Now().String(),
